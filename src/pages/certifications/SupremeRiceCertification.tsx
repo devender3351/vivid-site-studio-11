@@ -56,7 +56,7 @@ const SupremeRiceCertification = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-950/20 dark:via-green-950/20 dark:to-teal-950/20 py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -114,7 +114,7 @@ const SupremeRiceCertification = () => {
               {/* Recipient Info */}
               <div className="text-center mb-10">
                 <p className="text-muted-foreground mb-2">This certifies that</p>
-                <h2 className="text-3xl font-bold text-emerald-700 dark:text-emerald-400 mb-2">
+                <h2 className="text-3xl font-bold text-emerald-400 mb-2">
                   {certificateData.recipient}
                 </h2>
                 <p className="text-muted-foreground">has successfully completed</p>
@@ -145,7 +145,7 @@ const SupremeRiceCertification = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800"
+                    className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-800"
                   >
                     <skill.icon className="w-8 h-8 text-emerald-600 mb-2" />
                     <h4 className="font-semibold text-sm mb-1">{skill.title}</h4>

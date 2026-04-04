@@ -422,24 +422,24 @@ const AiDronesRiceCropping = () => {
               
               {/* Floating Info Cards */}
               <motion.div
-                className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-2xl"
+                className="absolute -top-4 -right-4 bg-card rounded-2xl p-4 shadow-2xl border border-border"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
                 <div className="flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-emerald-600" />
-                  <span className="font-semibold text-sm text-gray-800">Yield: +25%</span>
+                  <span className="font-semibold text-sm text-foreground">Yield: +25%</span>
                 </div>
               </motion.div>
               
               <motion.div
-                className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-2xl"
+                className="absolute -bottom-4 -left-4 bg-card rounded-2xl p-4 shadow-2xl border border-border"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
                 <div className="flex items-center gap-2">
                   <Droplets className="w-5 h-5 text-blue-500" />
-                  <span className="font-semibold text-sm text-gray-800">Water Saved: 30%</span>
+                  <span className="font-semibold text-sm text-foreground">Water Saved: 30%</span>
                 </div>
               </motion.div>
             </div>
