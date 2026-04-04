@@ -3,10 +3,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import vrDigital from "@/assets/vr-digital-world.jpg";
 
 const CTASection = () => {
   const ref = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.1]);
@@ -42,12 +44,22 @@ const CTASection = () => {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <MagneticButton>
-              <Button variant="hero" size="lg" className="gap-2 rounded-full px-10 h-14 text-base">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="gap-2 rounded-full px-10 h-14 text-base"
+                onClick={() => navigate("/register")}
+              >
                 Book a Session <ArrowRight className="h-5 w-5" />
               </Button>
             </MagneticButton>
             <MagneticButton>
-              <Button variant="heroOutline" size="lg" className="rounded-full px-10 h-14 text-base">
+              <Button 
+                variant="heroOutline" 
+                size="lg" 
+                className="rounded-full px-10 h-14 text-base"
+                onClick={() => navigate("/contact")}
+              >
                 Contact Us
               </Button>
             </MagneticButton>

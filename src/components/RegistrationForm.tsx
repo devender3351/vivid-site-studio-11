@@ -6,8 +6,10 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Eye, EyeOff, User, Mail, Lock, Phone, Calendar, Sparkles } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, Phone, Calendar, Sparkles, Award, Plane, Sprout, Brain, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface RegistrationFormData {
   firstName: string;
@@ -40,6 +42,7 @@ const experienceLevels = [
 ];
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<RegistrationFormData>({
     firstName: "",
     lastName: "",
@@ -57,6 +60,7 @@ const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showCertificationOptions, setShowCertificationOptions] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,7 +148,10 @@ const RegistrationForm = () => {
     });
     
     setIsLoading(false);
-    // Reset form or redirect
+    setShowCertificationOptions(true);
+    toast.success("Registration successful! Choose your certification path.", {
+      description: "Select a program to begin your training.",
+    });
   };
 
   const formVariants = {
@@ -159,7 +166,110 @@ const RegistrationForm = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="w-full max-w-lg mx-auto">
+      {showCertificationOptions ? (
+        <Card className="w-full max-w-2xl mx-auto border-2 border-emerald-500/30">
+          <CardHeader className="text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4"
+            >
+              <Award className="w-8 h-8 text-emerald-600" />
+            </motion.div>
+            <CardTitle className="text-2xl">Choose Your Certification</CardTitle>
+            <CardDescription>
+              Select a training program to begin your professional certification journey
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent className="space-y-4">
+            {/* Featured Certification */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border-2 border-emerald-500/50 cursor-pointer"
+              onClick={() => navigate("/supreme-rice-cultivation")}
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                  <Award className="w-6 h-6 text-emerald-600" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-semibold">Supreme Rice Cultivation</h3>
+                    <Badge className="bg-emerald-500 text-white text-xs">Featured</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Complete 3-module certification covering drone operations, crop management, and AI analytics
+                  </p>
+                  <div className="flex gap-2 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1"><Plane className="w-3 h-3" /> Drone Training</span>
+                    <span className="flex items-center gap-1"><Sprout className="w-3 h-3" /> Crop Growth</span>
+                    <span className="flex items-center gap-1"><Brain className="w-3 h-3" /> AI Analytics</span>
+                  </div>
+                </div>
+                <ArrowRight className="w-5 h-5 text-emerald-600" />
+              </div>
+            </motion.div>
+
+            {/* Other Certifications */}
+            <div className="grid gap-3">
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="p-3 rounded-lg border hover:border-accent cursor-pointer transition-colors"
+                onClick={() => navigate("/agricultural-drone")}
+              >
+                <div className="flex items-center gap-3">
+                  <Plane className="w-5 h-5 text-green-600" />
+                  <div className="flex-1">
+                    <h4 className="font-medium text-sm">Agricultural Drone Training</h4>
+                    <p className="text-xs text-muted-foreground">Precision spraying and monitoring</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="p-3 rounded-lg border hover:border-accent cursor-pointer transition-colors"
+                onClick={() => navigate("/ai-rice-cultivation")}
+              >
+                <div className="flex items-center gap-3">
+                  <Brain className="w-5 h-5 text-amber-600" />
+                  <div className="flex-1">
+                    <h4 className="font-medium text-sm">AI Rice Cultivation</h4>
+                    <p className="text-xs text-muted-foreground">Smart farming with AI analytics</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="p-3 rounded-lg border hover:border-accent cursor-pointer transition-colors"
+                onClick={() => navigate("/crop-growth-study")}
+              >
+                <div className="flex items-center gap-3">
+                  <Sprout className="w-5 h-5 text-emerald-600" />
+                  <div className="flex-1">
+                    <h4 className="font-medium text-sm">Crop Growth Study</h4>
+                    <p className="text-xs text-muted-foreground">Scientific crop development tracking</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="pt-4 border-t">
+              <Button 
+                variant="outline" 
+                className="w-full"
+                onClick={() => setShowCertificationOptions(false)}
+              >
+                Back to Form
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card className="w-full max-w-lg mx-auto">
         <CardHeader className="text-center">
           <motion.div
             initial={{ scale: 0 }}
@@ -473,6 +583,7 @@ const RegistrationForm = () => {
           </form>
         </CardContent>
       </Card>
+      )}
     </motion.div>
   );
 };

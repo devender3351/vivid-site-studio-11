@@ -16,11 +16,13 @@ import AgriculturalDrone from "./pages/AgriculturalDrone.tsx";
 import AIRiceCultivation from "./pages/AIRiceCultivation.tsx";
 import CropGrowthStudy from "./pages/CropGrowthStudy.tsx";
 import Certifications from "./pages/Certifications.tsx";
+import SupremeRiceCultivation from "./pages/SupremeRiceCultivation.tsx";
 import GenzVRCertification from "./pages/certifications/GenzVRCertification.tsx";
 import GenAlphaCertification from "./pages/certifications/GenAlphaCertification.tsx";
 import MillenniumCertification from "./pages/certifications/MillenniumCertification.tsx";
 import AgriDroneCertification from "./pages/certifications/AgriDroneCertification.tsx";
 import AIRiceCertification from "./pages/certifications/AIRiceCertification.tsx";
+import SupremeRiceCertification from "./pages/certifications/SupremeRiceCertification.tsx";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
             <Route path="/certification/millennium" element={<MillenniumCertification />} />
             <Route path="/certification/agricultural-drone" element={<AgriDroneCertification />} />
             <Route path="/certification/ai-rice-cultivation" element={<AIRiceCertification />} />
+            <Route path="/supreme-rice-cultivation" element={<SupremeRiceCultivation />} />
+            <Route path="/certification/supreme-rice" element={<SupremeRiceCertification />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

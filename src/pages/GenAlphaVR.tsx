@@ -151,7 +151,12 @@ const GenAlphaVR = () => {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <MagneticButton>
-                <Button variant="hero" size="lg" className="gap-2 rounded-full px-10 h-14 text-base">
+                <Button 
+                  variant="hero" 
+                  size="lg" 
+                  className="gap-2 rounded-full px-10 h-14 text-base"
+                  onClick={() => navigate("/register")}
+                >
                   Book a Session <Sparkles className="h-5 w-5" />
                 </Button>
               </MagneticButton>
