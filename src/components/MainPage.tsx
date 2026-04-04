@@ -10,12 +10,13 @@ import {
   Users,
   Award,
   TrendingUp,
-  PlayCircle
+  PlayCircle,
+  Leaf,
+  Scan,
+  Wifi
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import TiltCard from "@/components/TiltCard";
-import heroImage from "@/assets/vr-digital-world.jpg";
-import aboutImage from "@/assets/about-vr.jpg";
 
 const stats = [
   { icon: Sprout, label: "Training Programs", value: "50+" },
@@ -50,34 +51,53 @@ const MainPage = () => {
 
   return (
     <section ref={ref} className="relative overflow-hidden">
-      {/* Hero Section - Full Width Image */}
+      {/* Hero Section - Agriculture Themed */}
       <div className="relative min-h-screen">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2 }}
-          className="absolute inset-0"
-        >
-          <motion.img
-            style={{ scale: imageScale }}
-            src={heroImage}
-            alt="VR Agriculture Training"
-            className="w-full h-full object-cover"
+        {/* Animated Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 via-green-900 to-teal-900">
+          {/* Animated Blobs */}
+          <motion.div 
+            className="absolute top-20 left-10 w-96 h-96 bg-green-500/20 rounded-full blur-[120px]"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 8, repeat: Infinity }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40" />
-        </motion.div>
+          <motion.div 
+            className="absolute bottom-20 right-10 w-80 h-80 bg-emerald-500/20 rounded-full blur-[100px]"
+            animate={{ scale: [1.2, 1, 1.2], opacity: [0.4, 0.3, 0.4] }}
+            transition={{ duration: 10, repeat: Infinity }}
+          />
+          <motion.div 
+            className="absolute top-1/2 left-1/2 w-72 h-72 bg-teal-500/20 rounded-full blur-[80px]"
+            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
+          
+          {/* Grid Pattern Overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        </div>
 
         {/* Hero Content */}
         <div className="relative z-10 container mx-auto px-4 min-h-screen flex flex-col justify-center items-center text-center pt-20">
+          {/* Central Icon */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="mb-6"
+          >
+            <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-emerald-500/30 to-green-600/30 backdrop-blur-sm border border-emerald-400/30 flex items-center justify-center">
+              <Leaf className="w-12 h-12 text-emerald-400" />
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <Badge className="mb-6 bg-accent/20 text-accent border-accent/30 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
               <Sprout className="w-3 h-3 mr-1" />
-              VR Agriculture Training
+              AI + GIS + VR Agriculture
             </Badge>
           </motion.div>
 
@@ -85,16 +105,16 @@ const MainPage = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="apple-text-hero max-w-4xl mb-6"
+            className="apple-text-hero max-w-4xl mb-6 text-white"
           >
-            Transform Your <span className="text-gradient">Farming</span>
+            Transform Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400">Farming</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-10"
+            className="text-xl md:text-2xl text-green-100/80 max-w-2xl mb-10"
           >
             Master modern agriculture with immersive VR training in drone operations, 
             crop management, and AI-powered analytics
@@ -108,7 +128,7 @@ const MainPage = () => {
           >
             <Button 
               size="lg" 
-              className="rounded-full px-8"
+              className="rounded-full px-8 bg-white text-emerald-900 hover:bg-green-50"
               onClick={() => navigate("/signup")}
             >
               <PlayCircle className="w-5 h-5 mr-2" />
@@ -118,7 +138,7 @@ const MainPage = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="rounded-full px-8"
+              className="rounded-full px-8 border-white/30 text-white hover:bg-white/10"
               onClick={() => navigate("/certifications")}
             >
               View Certifications
@@ -136,9 +156,9 @@ const MainPage = () => {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2"
+            className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2"
           >
-            <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
+            <div className="w-1 h-2 bg-white/50 rounded-full" />
           </motion.div>
         </motion.div>
       </div>
@@ -176,13 +196,22 @@ const MainPage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="rounded-3xl overflow-hidden"
+            className="rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-900/50 to-green-900/50 p-8 border border-emerald-500/20"
           >
-            <img
-              src={aboutImage}
-              alt="VR Agriculture Training Center"
-              className="w-full h-[400px] object-cover"
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-emerald-500/20 to-green-600/20 flex items-center justify-center">
+                <Plane className="w-16 h-16 text-emerald-400" />
+              </div>
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-green-500/20 to-teal-600/20 flex items-center justify-center">
+                <Scan className="w-16 h-16 text-green-400" />
+              </div>
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-600/20 flex items-center justify-center">
+                <Brain className="w-16 h-16 text-teal-400" />
+              </div>
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center">
+                <Wifi className="w-16 h-16 text-cyan-400" />
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
