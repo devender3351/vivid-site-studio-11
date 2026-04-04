@@ -67,6 +67,12 @@ const Navbar = () => {
               {l}
             </a>
           ))}
+          <button 
+            onClick={() => navigate("/certifications")}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Certifications
+          </button>
           <MagneticButton strength={0.25}>
             <Button 
               variant="hero" 
@@ -103,6 +109,15 @@ const Navbar = () => {
                 {l}
               </a>
             ))}
+            <button
+              onClick={() => {
+                setOpen(false);
+                navigate("/certifications");
+              }}
+              className="block text-sm font-medium py-1 text-left w-full text-muted-foreground hover:text-foreground"
+            >
+              Certifications
+            </button>
             <Button 
               variant="hero" 
               size="sm" 
