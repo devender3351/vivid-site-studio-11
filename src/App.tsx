@@ -23,6 +23,8 @@ import MillenniumCertification from "./pages/certifications/MillenniumCertificat
 import AgriDroneCertification from "./pages/certifications/AgriDroneCertification.tsx";
 import AIRiceCertification from "./pages/certifications/AIRiceCertification.tsx";
 import SupremeRiceCertification from "./pages/certifications/SupremeRiceCertification.tsx";
+import SignUp from "./pages/SignUp.tsx";
+import SignIn from "./pages/SignIn.tsx";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +54,8 @@ const App = () => (
             <Route path="/certification/ai-rice-cultivation" element={<AIRiceCertification />} />
             <Route path="/supreme-rice-cultivation" element={<SupremeRiceCultivation />} />
             <Route path="/certification/supreme-rice" element={<SupremeRiceCertification />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

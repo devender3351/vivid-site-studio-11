@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, User, LogIn } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
 import { Link, useNavigate } from "react-router-dom";
@@ -87,16 +87,30 @@ const Navbar = () => {
               </Badge>
             )}
           </button>
-          <MagneticButton strength={0.25}>
+          
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center gap-2">
             <Button 
-              variant="hero" 
+              variant="ghost" 
               size="sm" 
-              className="rounded-full px-6"
-              onClick={() => navigate("/register")}
+              className="rounded-full"
+              onClick={() => navigate("/signin")}
             >
-              Get Started
+              <LogIn className="w-4 h-4 mr-1" />
+              Sign In
             </Button>
-          </MagneticButton>
+            <MagneticButton strength={0.25}>
+              <Button 
+                variant="hero" 
+                size="sm" 
+                className="rounded-full px-6"
+                onClick={() => navigate("/signup")}
+              >
+                <User className="w-4 h-4 mr-1" />
+                Sign Up
+              </Button>
+            </MagneticButton>
+          </div>
         </div>
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -146,17 +160,34 @@ const Navbar = () => {
                 </Badge>
               )}
             </button>
-            <Button 
-              variant="hero" 
-              size="sm" 
-              className="w-full rounded-full"
-              onClick={() => {
-                setOpen(false);
-                navigate("/register");
-              }}
-            >
-              Get Started
-            </Button>
+            
+            {/* Mobile Auth Buttons */}
+            <div className="border-t pt-4 mt-2 space-y-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full rounded-full"
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/signin");
+                }}
+              >
+                <LogIn className="w-4 h-4 mr-1" />
+                Sign In
+              </Button>
+              <Button 
+                variant="hero" 
+                size="sm" 
+                className="w-full rounded-full"
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/signup");
+                }}
+              >
+                <User className="w-4 h-4 mr-1" />
+                Sign Up Free
+              </Button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
