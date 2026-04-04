@@ -17,7 +17,11 @@ import {
   PlayCircle,
   Wifi,
   Satellite,
-  ScanLine
+  ScanLine,
+  Video,
+  VideoIcon,
+  Glasses,
+  MoveHorizontal
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -172,6 +176,139 @@ const AiDronesRiceCropping = () => {
               <p className="text-sm text-green-100">{stat.label}</p>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* VR Agriculture Video Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-24"
+        >
+          <div className="text-center mb-8">
+            <Badge className="mb-4 bg-white/10 text-white border-white/20">
+              <Video className="w-3 h-3 mr-1" />
+              VR Experience
+            </Badge>
+            <h2 className="text-3xl font-bold text-white mb-2">
+              VR Agriculture in Action
+            </h2>
+            <p className="text-green-100 max-w-2xl mx-auto">
+              Experience immersive virtual reality training for agricultural drone operations and rice cultivation
+            </p>
+          </div>
+          
+          <div className="relative max-w-4xl mx-auto">
+            <div className="aspect-video rounded-3xl bg-gradient-to-br from-emerald-500/20 to-green-600/20 p-1 border border-white/20 backdrop-blur-sm">
+              <div className="w-full h-full rounded-[22px] bg-black/40 flex items-center justify-center relative overflow-hidden">
+                {/* Video Placeholder */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-900/50 to-emerald-900/50" />
+                
+                {/* Animated Drone in Video Placeholder */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                >
+                  <Plane className="w-24 h-24 text-emerald-400/80" />
+                </motion.div>
+                
+                {/* Play Button Overlay */}
+                <div className="relative z-10 text-center">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center hover:bg-white/30 transition-colors"
+                    onClick={() => toast.info("30-second VR Agriculture video coming soon!", { description: "Experience immersive drone training in VR" })}
+                  >
+                    <PlayCircle className="w-10 h-10 text-white" />
+                  </motion.button>
+                  <p className="mt-4 text-white/80 text-sm font-medium">30-Second VR Preview</p>
+                  <p className="text-white/60 text-xs mt-1">Click to play demo</p>
+                </div>
+                
+                {/* Video Progress Bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+                  <motion.div 
+                    className="h-full bg-emerald-400"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  />
+                </div>
+                
+                {/* Duration Badge */}
+                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">
+                  <span className="text-white text-xs font-medium">0:30</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Scroll Bar with Drone Interaction */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 mb-8"
+        >
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-4 mb-4">
+              <Glasses className="w-5 h-5 text-emerald-300" />
+              <span className="text-white font-medium">Interactive Drone Scroll</span>
+              <MoveHorizontal className="w-4 h-4 text-green-200" />
+            </div>
+            
+            <div className="relative h-20 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 overflow-hidden">
+              {/* Scroll Track */}
+              <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-2 bg-white/20 rounded-full" />
+              
+              {/* Animated Drone on Scroll Bar */}
+              <motion.div
+                className="absolute top-1/2 -translate-y-1/2"
+                animate={{ 
+                  left: ["5%", "85%", "5%"],
+                }}
+                transition={{ 
+                  duration: 8, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+              >
+                <div className="relative">
+                  <motion.div
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-14 h-14 rounded-full bg-emerald-500/30 backdrop-blur-sm border border-emerald-400/50 flex items-center justify-center shadow-lg shadow-emerald-500/20"
+                  >
+                    <Plane className="w-8 h-8 text-emerald-300" />
+                  </motion.div>
+                  
+                  {/* Drone Scanning Effect */}
+                  <motion.div
+                    className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-20 h-6 bg-gradient-to-b from-emerald-400/30 to-transparent rounded-full"
+                    animate={{ opacity: [0.3, 0.8, 0.3], scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  />
+                </div>
+              </motion.div>
+              
+              {/* Field Markers */}
+              <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between">
+                {["Start", "25%", "50%", "75%", "End"].map((marker, i) => (
+                  <div key={i} className="flex flex-col items-center">
+                    <div className="w-1 h-3 bg-white/40 rounded-full" />
+                    <span className="text-[10px] text-white/50 mt-1">{marker}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <p className="text-center text-green-100/70 text-sm mt-3">
+              Watch the drone navigate through the virtual rice field
+            </p>
+          </div>
         </motion.div>
 
         {/* AI Capabilities Grid */}
