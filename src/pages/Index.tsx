@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import AiDronesRiceCropping from "@/components/AiDronesRiceCropping";
+import MainPage from "@/components/MainPage";
 import TrustedBySection from "@/components/TrustedBySection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 const Index = () => (
   <>
     <Navbar />
-    <AiDronesRiceCropping />
+    <MainPage />
     <TrustedBySection />
     <AboutSection />
     <ServicesSection />
