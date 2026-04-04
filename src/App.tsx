@@ -25,6 +25,7 @@ import AIRiceCertification from "./pages/certifications/AIRiceCertification.tsx"
 import SupremeRiceCertification from "./pages/certifications/SupremeRiceCertification.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import SignIn from "./pages/SignIn.tsx";
+import SystemOverview from "./pages/SystemOverview.tsx";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/certification/supreme-rice" element={<SupremeRiceCertification />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/system-overview" element={<SystemOverview />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

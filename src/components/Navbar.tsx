@@ -76,6 +76,12 @@ const Navbar = () => {
           >
             Certifications
           </button>
+          <button 
+            onClick={() => navigate("/system-overview")}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            System Overview
+          </button>
           <button
             onClick={() => setIsCartOpen(true)}
             className="relative p-2 rounded-full hover:bg-accent/10 transition-colors"
@@ -145,6 +151,15 @@ const Navbar = () => {
               className="block text-sm font-medium py-1 text-left w-full text-muted-foreground hover:text-foreground"
             >
               Certifications
+            </button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                navigate("/system-overview");
+              }}
+              className="block text-sm font-medium py-1 text-left w-full text-muted-foreground hover:text-foreground"
+            >
+              System Overview
             </button>
             <button
               onClick={() => {
