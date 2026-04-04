@@ -33,8 +33,20 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import type { LucideIcon } from "lucide-react";
 
-const modules = [
+interface Module {
+  id: number;
+  title: string;
+  duration: string;
+  level: string;
+  description: string;
+  topics: string[];
+  icon: LucideIcon;
+  completed: boolean;
+}
+
+const modules: Module[] = [
   {
     id: 1,
     title: "Drone Basics & Safety",
