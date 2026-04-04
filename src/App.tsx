@@ -12,6 +12,7 @@ import MillenniumVR from "./pages/MillenniumVR.tsx";
 import Registration from "./pages/Registration.tsx";
 import AgriculturalDrone from "./pages/AgriculturalDrone.tsx";
 import AIRiceCultivation from "./pages/AIRiceCultivation.tsx";
+import CropGrowthStudy from "./pages/CropGrowthStudy.tsx";
 import Certifications from "./pages/Certifications.tsx";
 import GenzVRCertification from "./pages/certifications/GenzVRCertification.tsx";
 import GenAlphaCertification from "./pages/certifications/GenAlphaCertification.tsx";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/register" element={<Registration />} />
           <Route path="/agricultural-drone" element={<AgriculturalDrone />} />
           <Route path="/ai-rice-cultivation" element={<AIRiceCultivation />} />
+          <Route path="/crop-growth-study" element={<CropGrowthStudy />} />
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/certification/genz-vr" element={<GenzVRCertification />} />
           <Route path="/certification/gen-alpha" element={<GenAlphaCertification />} />

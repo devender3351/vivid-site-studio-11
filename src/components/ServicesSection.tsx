@@ -1,4 +1,4 @@
-import { Gamepad2, Palette, Clock, ArrowRight, Plane, Brain } from "lucide-react";
+import { Gamepad2, Palette, Clock, ArrowRight, Plane, Brain, Sprout } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -54,6 +54,15 @@ const services = [
     image: millenniumImg,
     extraImages: [],
     route: "/ai-rice-cultivation",
+  },
+  {
+    icon: Sprout,
+    title: "Crop Growth Study",
+    desc: "Scientific Analysis",
+    detail: "Master the science of crop development. Track, analyze, and optimize plant growth from seed to harvest using modern data-driven techniques.",
+    image: millenniumImg,
+    extraImages: [],
+    route: "/crop-growth-study",
   },
 ];
 
