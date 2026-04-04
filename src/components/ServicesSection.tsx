@@ -1,47 +1,17 @@
-import { Gamepad2, Palette, Clock, ArrowRight, Plane, Brain, Sprout } from "lucide-react";
+import { Plane, Brain, Sprout, Tractor, Leaf, Droplets, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import genzImg from "@/assets/genz-vr.jpg";
-import genalphaImg from "@/assets/genalpha-vr.jpg";
 import millenniumImg from "@/assets/millennium-vr.jpg";
-import vrGaming from "@/assets/vr-gaming-action.jpg";
 import TiltCard from "@/components/TiltCard";
 import ImageLightbox from "@/components/ImageLightbox";
 
 const services = [
   {
-    icon: Gamepad2,
-    title: "Genz VR",
-    desc: "Gaming oriented",
-    detail: "High-energy, competitive VR gaming experiences designed for the Gen-Z audience — fast-paced action, multiplayer arenas, and esports-ready setups.",
-    image: genzImg,
-    extraImages: [vrGaming],
-    route: "/genz-vr",
-  },
-  {
-    icon: Palette,
-    title: "Gen Alpha VR",
-    desc: "Creative VR",
-    detail: "Imagination-powered VR for the youngest generation — build worlds, paint in 3D, and learn through play in safe, age-appropriate environments.",
-    image: genalphaImg,
-    extraImages: [],
-    route: "/gen-alpha-vr",
-  },
-  {
-    icon: Clock,
-    title: "Millennium VR",
-    desc: "Agricultural VR & AI",
-    detail: "VR-powered drone training, AI crop analytics, and precision agriculture — developed in partnership with the Southern University Ag Center.",
-    image: millenniumImg,
-    extraImages: [],
-    route: "/millennium-vr",
-  },
-  {
     icon: Plane,
-    title: "Agri Drone Training",
+    title: "Agricultural Drone Training",
     desc: "Precision Agriculture",
-    detail: "Master agricultural drone operations including crop monitoring, precision spraying, and field mapping. DGCA certified training program.",
+    detail: "Master agricultural drone operations including crop monitoring, precision spraying, and field mapping. DGCA certified training program with VR simulation.",
     image: millenniumImg,
     extraImages: [],
     route: "/agricultural-drone",
@@ -50,7 +20,7 @@ const services = [
     icon: Brain,
     title: "AI Rice Cultivation",
     desc: "Smart Farming AI",
-    detail: "Learn AI-powered rice farming techniques including smart irrigation, pest detection, yield prediction, and automated crop management.",
+    detail: "Learn AI-powered rice farming techniques including smart irrigation, pest detection, yield prediction, and automated crop management using machine learning.",
     image: millenniumImg,
     extraImages: [],
     route: "/ai-rice-cultivation",
@@ -59,7 +29,34 @@ const services = [
     icon: Sprout,
     title: "Crop Growth Study",
     desc: "Scientific Analysis",
-    detail: "Master the science of crop development. Track, analyze, and optimize plant growth from seed to harvest using modern data-driven techniques.",
+    detail: "Master the science of crop development. Track, analyze, and optimize plant growth from seed to harvest using modern data-driven techniques and AI analytics.",
+    image: millenniumImg,
+    extraImages: [],
+    route: "/crop-growth-study",
+  },
+  {
+    icon: Tractor,
+    title: "Farm Equipment VR",
+    desc: "Machinery Simulation",
+    detail: "Train on virtual farm equipment including tractors, harvesters, and precision tools. Safe, cost-effective training before operating real machinery.",
+    image: millenniumImg,
+    extraImages: [],
+    route: "/supreme-rice-cultivation",
+  },
+  {
+    icon: Droplets,
+    title: "Smart Irrigation Systems",
+    desc: "Water Management",
+    detail: "Learn advanced irrigation techniques including drip systems, automated sprinklers, and AI-powered water optimization for maximum yield with minimal waste.",
+    image: millenniumImg,
+    extraImages: [],
+    route: "/ai-rice-cultivation",
+  },
+  {
+    icon: Leaf,
+    title: "Sustainable Farming",
+    desc: "Eco-Friendly Agriculture",
+    detail: "Discover sustainable farming practices, organic cultivation methods, and environmentally conscious approaches to modern agriculture.",
     image: millenniumImg,
     extraImages: [],
     route: "/crop-growth-study",
@@ -89,10 +86,10 @@ const ServicesSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center space-y-5 mb-20"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Our Experiences</p>
-          <h2 className="apple-text-large">Choose Your Reality</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Training Programs</p>
+          <h2 className="apple-text-large">Master Modern Agriculture</h2>
           <p className="text-muted-foreground text-lg max-w-lg mx-auto">
-            Three distinct VR worlds crafted for different generations and interests.
+            Comprehensive VR training programs for agricultural professionals — drone operations, AI analytics, and smart farming techniques.
           </p>
         </motion.div>
 
