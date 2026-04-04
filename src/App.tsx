@@ -3,7 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CartProvider } from "@/contexts/CartContext";
 import CursorGlow from "@/components/CursorGlow";
+import Cart from "@/components/Cart";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import GenzVR from "./pages/GenzVR.tsx";
@@ -24,31 +26,34 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <CursorGlow />
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/genz-vr" element={<GenzVR />} />
-          <Route path="/gen-alpha-vr" element={<GenAlphaVR />} />
-          <Route path="/millennium-vr" element={<MillenniumVR />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/agricultural-drone" element={<AgriculturalDrone />} />
-          <Route path="/ai-rice-cultivation" element={<AIRiceCultivation />} />
-          <Route path="/crop-growth-study" element={<CropGrowthStudy />} />
-          <Route path="/certifications" element={<Certifications />} />
-          <Route path="/certification/genz-vr" element={<GenzVRCertification />} />
-          <Route path="/certification/gen-alpha" element={<GenAlphaCertification />} />
-          <Route path="/certification/millennium" element={<MillenniumCertification />} />
-          <Route path="/certification/agricultural-drone" element={<AgriDroneCertification />} />
-          <Route path="/certification/ai-rice-cultivation" element={<AIRiceCertification />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <CartProvider>
+      <TooltipProvider>
+        <CursorGlow />
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Cart />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/genz-vr" element={<GenzVR />} />
+            <Route path="/gen-alpha-vr" element={<GenAlphaVR />} />
+            <Route path="/millennium-vr" element={<MillenniumVR />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/agricultural-drone" element={<AgriculturalDrone />} />
+            <Route path="/ai-rice-cultivation" element={<AIRiceCultivation />} />
+            <Route path="/crop-growth-study" element={<CropGrowthStudy />} />
+            <Route path="/certifications" element={<Certifications />} />
+            <Route path="/certification/genz-vr" element={<GenzVRCertification />} />
+            <Route path="/certification/gen-alpha" element={<GenAlphaCertification />} />
+            <Route path="/certification/millennium" element={<MillenniumCertification />} />
+            <Route path="/certification/agricultural-drone" element={<AgriDroneCertification />} />
+            <Route path="/certification/ai-rice-cultivation" element={<AIRiceCertification />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </CartProvider>
   </QueryClientProvider>
 );
 

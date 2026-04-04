@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
+import { ShoppingCart } from "lucide-react";
 
 const aiModules = [
   {
@@ -119,11 +121,24 @@ const aiBenefits = [
 const AIRiceCultivation = () => {
   const [activeModule, setActiveModule] = useState<number | null>(null);
   const [enrolled, setEnrolled] = useState(false);
+  const { addToCart } = useCart();
 
   const handleEnroll = () => {
     setEnrolled(true);
     toast.success("Enrolled in AI Rice Cultivation Training!", {
       description: "Course materials will be sent to your email.",
+    });
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: "ai-rice-cultivation",
+      title: "AI Rice Cultivation Training",
+      description: "AI-powered smart farming for rice production optimization including pest detection, yield prediction, and automated management.",
+      price: 5999,
+      duration: "14 hours",
+      level: "Advanced",
+      category: "agri-training",
     });
   };
 
@@ -486,8 +501,14 @@ const AIRiceCultivation = () => {
             >
               {enrolled ? "Continue Learning" : "Enroll Now - ₹5,999"}
             </Button>
-            <Button variant="outline" size="lg" className="rounded-full">
-              Download Brochure
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="rounded-full border-amber-500/30 text-amber-700 hover:bg-amber-50"
+              onClick={handleAddToCart}
+            >
+              <ShoppingCart className="mr-2 h-5 w-5" />
+              Add to Cart
             </Button>
           </div>
         </motion.div>

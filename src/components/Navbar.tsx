@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
+import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const navigate = useNavigate();
+  const { totalItems, setIsCartOpen } = useCart();
   const links = ["About", "Services", "Testimonials", "Contact"];
 
   const { scrollYProgress } = useScroll();
@@ -73,6 +76,17 @@ const Navbar = () => {
           >
             Certifications
           </button>
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 rounded-full hover:bg-accent/10 transition-colors"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            {totalItems > 0 && (
+              <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-accent text-accent-foreground">
+                {totalItems}
+              </Badge>
+            )}
+          </button>
           <MagneticButton strength={0.25}>
             <Button 
               variant="hero" 
@@ -117,6 +131,20 @@ const Navbar = () => {
               className="block text-sm font-medium py-1 text-left w-full text-muted-foreground hover:text-foreground"
             >
               Certifications
+            </button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                setIsCartOpen(true);
+              }}
+              className="flex items-center justify-between text-sm font-medium py-1 text-left w-full text-muted-foreground hover:text-foreground"
+            >
+              <span>Cart</span>
+              {totalItems > 0 && (
+                <Badge className="h-5 px-2 text-xs bg-accent text-accent-foreground">
+                  {totalItems} items
+                </Badge>
+              )}
             </button>
             <Button 
               variant="hero" 

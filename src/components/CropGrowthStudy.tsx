@@ -29,6 +29,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
+import { ShoppingCart } from "lucide-react";
 
 const growthStages = [
   {
@@ -127,11 +129,24 @@ const CropGrowthStudy = () => {
   const [activeModule, setActiveModule] = useState<number | null>(null);
   const [selectedStage, setSelectedStage] = useState(0);
   const [enrolled, setEnrolled] = useState(false);
+  const { addToCart } = useCart();
 
   const handleEnroll = () => {
     setEnrolled(true);
     toast.success("Enrolled in Crop Growth Study program!", {
       description: "Your crop monitoring toolkit will be sent to your email.",
+    });
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: "crop-growth-study",
+      title: "Crop Growth Study",
+      description: "Master the science of crop development. Track, analyze, and optimize plant growth from seed to harvest using modern data-driven techniques.",
+      price: 3999,
+      duration: "14 hours",
+      level: "Intermediate",
+      category: "agri-training",
     });
   };
 
@@ -549,8 +564,14 @@ const CropGrowthStudy = () => {
             >
               {enrolled ? "Access Course" : "Enroll Now - ₹3,999"}
             </Button>
-            <Button variant="outline" size="lg" className="rounded-full">
-              View Sample Data
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="rounded-full border-emerald-500/30 text-emerald-700 hover:bg-emerald-50"
+              onClick={handleAddToCart}
+            >
+              <ShoppingCart className="mr-2 h-5 w-5" />
+              Add to Cart
             </Button>
           </div>
         </motion.div>

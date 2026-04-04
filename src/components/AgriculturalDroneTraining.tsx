@@ -34,6 +34,8 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import type { LucideIcon } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { ShoppingCart } from "lucide-react";
 
 interface Module {
   id: number;
@@ -116,11 +118,24 @@ const stats = [
 const AgriculturalDroneTraining = () => {
   const [activeModule, setActiveModule] = useState<number | null>(null);
   const [enrolled, setEnrolled] = useState(false);
+  const { addToCart } = useCart();
 
   const handleEnroll = () => {
     setEnrolled(true);
     toast.success("Successfully enrolled in Agricultural Drone Training!", {
       description: "Check your email for course access details.",
+    });
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: "agri-drone-training",
+      title: "Agricultural Drone Training",
+      description: "Master precision agriculture with cutting-edge drone technology including pesticide spraying and real-time data gathering.",
+      price: 4999,
+      duration: "12+ hours",
+      level: "Professional",
+      category: "agri-training",
     });
   };
 
@@ -169,8 +184,14 @@ const AgriculturalDroneTraining = () => {
                   </>
                 )}
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full">
-                View Syllabus
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="rounded-full border-green-500/30 text-green-700 hover:bg-green-50"
+                onClick={handleAddToCart}
+              >
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                Add to Cart
               </Button>
             </div>
           </motion.div>
@@ -587,9 +608,14 @@ const AgriculturalDroneTraining = () => {
             >
               {enrolled ? "Continue Learning" : "Enroll Now - ₹4,999"}
             </Button>
-            <Button variant="outline" size="lg" className="rounded-full gap-2">
-              <Users className="w-4 h-4" />
-              Group Discounts
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="rounded-full gap-2 border-green-500/30 text-green-700 hover:bg-green-50"
+              onClick={handleAddToCart}
+            >
+              <ShoppingCart className="w-4 h-4" />
+              Add to Cart
             </Button>
           </div>
         </motion.div>
