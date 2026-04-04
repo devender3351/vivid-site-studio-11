@@ -10,6 +10,8 @@ import GenzVR from "./pages/GenzVR.tsx";
 import GenAlphaVR from "./pages/GenAlphaVR.tsx";
 import MillenniumVR from "./pages/MillenniumVR.tsx";
 import Registration from "./pages/Registration.tsx";
+import AgriculturalDrone from "./pages/AgriculturalDrone.tsx";
+import AIRiceCultivation from "./pages/AIRiceCultivation.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/gen-alpha-vr" element={<GenAlphaVR />} />
           <Route path="/millennium-vr" element={<MillenniumVR />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/agricultural-drone" element={<AgriculturalDrone />} />
+          <Route path="/ai-rice-cultivation" element={<AIRiceCultivation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

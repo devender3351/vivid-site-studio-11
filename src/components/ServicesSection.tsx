@@ -1,4 +1,4 @@
-import { Gamepad2, Palette, Clock, ArrowRight } from "lucide-react";
+import { Gamepad2, Palette, Clock, ArrowRight, Plane, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +36,24 @@ const services = [
     image: millenniumImg,
     extraImages: [],
     route: "/millennium-vr",
+  },
+  {
+    icon: Plane,
+    title: "Agri Drone Training",
+    desc: "Precision Agriculture",
+    detail: "Master agricultural drone operations including crop monitoring, precision spraying, and field mapping. DGCA certified training program.",
+    image: millenniumImg,
+    extraImages: [],
+    route: "/agricultural-drone",
+  },
+  {
+    icon: Brain,
+    title: "AI Rice Cultivation",
+    desc: "Smart Farming AI",
+    detail: "Learn AI-powered rice farming techniques including smart irrigation, pest detection, yield prediction, and automated crop management.",
+    image: millenniumImg,
+    extraImages: [],
+    route: "/ai-rice-cultivation",
   },
 ];
 
