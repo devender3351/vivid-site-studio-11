@@ -28,6 +28,8 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const trainingModules = [
   {
@@ -197,6 +199,8 @@ const SupremeRiceCultivation = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden bg-gradient-to-br from-emerald-900 via-green-800 to-teal-900">
         <div className="absolute inset-0">
@@ -497,6 +501,8 @@ const SupremeRiceCultivation = () => {
           </motion.div>
         </section>
       )}
+      </main>
+      <Footer />
     </div>
   );
 };

@@ -8,6 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { Eye, EyeOff, User, Mail, Lock, ArrowRight, Sprout } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface SignUpFormData {
   firstName: string;
@@ -90,13 +92,15 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-950 dark:via-green-950 dark:to-teal-950 flex items-center justify-center px-4 py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
-      >
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main className="min-h-[calc(100vh-64px)] bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-950 dark:via-green-950 dark:to-teal-950 flex items-center justify-center px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-md"
+        >
         <Card className="border-2 border-emerald-500/20 shadow-xl">
           <CardHeader className="text-center space-y-4">
             <motion.div
@@ -275,6 +279,8 @@ const SignUp = () => {
           </CardContent>
         </Card>
       </motion.div>
+      </main>
+      <Footer />
     </div>
   );
 };
