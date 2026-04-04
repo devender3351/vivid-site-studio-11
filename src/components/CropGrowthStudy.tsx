@@ -143,7 +143,7 @@ const CropGrowthStudy = () => {
       id: "crop-growth-study",
       title: "Crop Growth Study",
       description: "Master the science of crop development. Track, analyze, and optimize plant growth from seed to harvest using modern data-driven techniques.",
-      price: 3999,
+      price: 200,
       duration: "14 hours",
       level: "Intermediate",
       category: "agri-training",
@@ -562,7 +562,7 @@ const CropGrowthStudy = () => {
               onClick={handleEnroll}
               disabled={enrolled}
             >
-              {enrolled ? "Access Course" : "Enroll Now - ₹3,999"}
+              {enrolled ? "Access Course" : "Enroll Now - $200"}
             </Button>
             <Button 
               variant="outline" 

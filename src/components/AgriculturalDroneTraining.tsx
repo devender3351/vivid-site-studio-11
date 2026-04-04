@@ -132,7 +132,7 @@ const AgriculturalDroneTraining = () => {
       id: "agri-drone-training",
       title: "Agricultural Drone Training",
       description: "Master precision agriculture with cutting-edge drone technology including pesticide spraying and real-time data gathering.",
-      price: 4999,
+      price: 200,
       duration: "12+ hours",
       level: "Professional",
       category: "agri-training",
@@ -606,7 +606,7 @@ const AgriculturalDroneTraining = () => {
               onClick={handleEnroll}
               disabled={enrolled}
             >
-              {enrolled ? "Continue Learning" : "Enroll Now - ₹4,999"}
+              {enrolled ? "Continue Learning" : "Enroll Now - $200"}
             </Button>
             <Button 
               variant="outline" 

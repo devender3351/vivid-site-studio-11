@@ -135,7 +135,7 @@ const AIRiceCultivation = () => {
       id: "ai-rice-cultivation",
       title: "AI Rice Cultivation Training",
       description: "AI-powered smart farming for rice production optimization including pest detection, yield prediction, and automated management.",
-      price: 5999,
+      price: 200,
       duration: "14 hours",
       level: "Advanced",
       category: "agri-training",
@@ -499,7 +499,7 @@ const AIRiceCultivation = () => {
               onClick={handleEnroll}
               disabled={enrolled}
             >
-              {enrolled ? "Continue Learning" : "Enroll Now - ₹5,999"}
+              {enrolled ? "Continue Learning" : "Enroll Now - $200"}
             </Button>
             <Button 
               variant="outline" 

@@ -34,7 +34,7 @@ const Cart = () => {
       return;
     }
     toast.success("Proceeding to checkout!", {
-      description: `Total: ₹${totalPrice.toLocaleString()}`,
+      description: `Total: $${Math.round(totalPrice * 1.10)}`,
     });
     // In a real app, this would redirect to checkout page
   };
@@ -154,7 +154,7 @@ const Cart = () => {
                                 </Button>
                               </div>
                               <p className="font-semibold text-accent">
-                                ₹{(item.price * item.quantity).toLocaleString()}
+                                ${(item.price * item.quantity)}
                               </p>
                             </div>
                           </div>
@@ -180,16 +180,16 @@ const Cart = () => {
                 <div className="p-4 border-t bg-muted/50 space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span className="font-semibold">₹{totalPrice.toLocaleString()}</span>
+                    <span className="font-semibold">${totalPrice}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">GST (18%)</span>
-                    <span className="font-semibold">₹{Math.round(totalPrice * 0.18).toLocaleString()}</span>
+                    <span className="text-muted-foreground">Tax (10%)</span>
+                    <span className="font-semibold">${Math.round(totalPrice * 0.10)}</span>
                   </div>
                   <div className="flex justify-between items-center pt-2 border-t">
                     <span className="font-semibold text-lg">Total</span>
                     <span className="font-bold text-xl text-accent">
-                      ₹{Math.round(totalPrice * 1.18).toLocaleString()}
+                      ${Math.round(totalPrice * 1.10)}
                     </span>
                   </div>
                   
