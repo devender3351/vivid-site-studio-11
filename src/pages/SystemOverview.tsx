@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,9 +23,13 @@ import {
   Cpu,
   Wifi,
   Target,
-  Zap
+  Zap,
+  ChevronDown,
+  ChevronUp,
+  Info
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -99,16 +103,186 @@ const certifications = [
 ];
 
 const flowchartSteps = [
-  { title: "Data Collection", description: "Sensors, Weather, Images, GIS", icon: Database },
-  { title: "Data Cleaning", description: "Boundary Check, Soil Mapping, QA", icon: Shield },
-  { title: "AI Processing", description: "Disease Detection, Yield Prediction", icon: Brain },
-  { title: "Decision Support", description: "Alerts, Recommendations, Planning", icon: Target },
-  { title: "VR Integration", description: "Training, Scenarios, Feedback", icon: Glasses },
-  { title: "Farmer Action", description: "Improved Yield & Efficiency", icon: TrendingUp }
+  { 
+    title: "Data Collection", 
+    description: "Sensors, Weather, Images, GIS",
+    details: "Multiple data sources including soil sensors, weather stations, satellite imagery, and GIS field boundaries provide comprehensive agricultural data.",
+    icon: Database,
+    color: "from-blue-500 to-cyan-600",
+    bgColor: "bg-blue-500/10",
+    textColor: "text-blue-400"
+  },
+  { 
+    title: "Data Cleaning", 
+    description: "Boundary Check, Soil Mapping, QA",
+    details: "GIS validation ensures accurate field boundaries, SSURGO soil mapping, and quality assurance checks for data integrity.",
+    icon: Shield,
+    color: "from-emerald-500 to-teal-600",
+    bgColor: "bg-emerald-500/10",
+    textColor: "text-emerald-400"
+  },
+  { 
+    title: "AI Processing", 
+    description: "Disease Detection, Yield Prediction",
+    details: "Machine learning models analyze crop health, predict diseases, estimate yields, and forecast optimal harvest timing using GDD calculations.",
+    icon: Brain,
+    color: "from-purple-500 to-indigo-600",
+    bgColor: "bg-purple-500/10",
+    textColor: "text-purple-400"
+  },
+  { 
+    title: "Decision Support", 
+    description: "Alerts, Recommendations, Planning",
+    details: "AI-generated insights provide actionable recommendations for irrigation, fertilization, pest control, and harvest logistics planning.",
+    icon: Target,
+    color: "from-orange-500 to-amber-600",
+    bgColor: "bg-orange-500/10",
+    textColor: "text-orange-400"
+  },
+  { 
+    title: "VR Integration", 
+    description: "Training, Scenarios, Feedback",
+    details: "Immersive VR simulations allow farmers to practice techniques, experience scenarios, and receive immediate feedback in a risk-free environment.",
+    icon: Glasses,
+    color: "from-pink-500 to-rose-600",
+    bgColor: "bg-pink-500/10",
+    textColor: "text-pink-400"
+  },
+  { 
+    title: "Farmer Action", 
+    description: "Improved Yield & Efficiency",
+    details: "Farmers apply learned techniques and AI insights to achieve higher yields, reduced costs, and sustainable farming practices.",
+    icon: TrendingUp,
+    color: "from-green-500 to-emerald-600",
+    bgColor: "bg-green-500/10",
+    textColor: "text-green-400"
+  }
 ];
+
+const FlowchartStep = ({ step, index, isActive, onClick, isLast }: { 
+  step: typeof flowchartSteps[0]; 
+  index: number; 
+  isActive: boolean; 
+  onClick: () => void;
+  isLast: boolean;
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.15, duration: 0.5 }}
+      className="relative"
+    >
+      {/* Connection Line */}
+      {!isLast && (
+        <>
+          {/* Desktop: Horizontal line */}
+          <motion.div 
+            className="hidden md:block absolute top-16 left-full w-full h-0.5 -translate-x-1/2"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+            style={{ originX: 0 }}
+          >
+            <div className="h-full bg-gradient-to-r from-accent/50 to-accent/20" />
+          </motion.div>
+          {/* Arrow */}
+          <div className="hidden md:block absolute top-16 left-full -translate-x-1/2 -translate-y-1/2 z-10">
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15 + 0.5 }}
+            >
+              <ArrowRight className="w-5 h-5 text-accent" />
+            </motion.div>
+          </div>
+          {/* Mobile: Vertical line */}
+          <motion.div 
+            className="md:hidden absolute top-full left-1/2 w-0.5 h-8 -translate-x-1/2"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+            style={{ originY: 0 }}
+          >
+            <div className="h-full bg-gradient-to-b from-accent/50 to-accent/20" />
+          </motion.div>
+        </>
+      )}
+
+      {/* Step Card */}
+      <motion.button
+        onClick={onClick}
+        className={`w-full text-left transition-all duration-300 ${isActive ? 'scale-105' : 'hover:scale-102'}`}
+        whileHover={{ y: -5 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <Card className={`h-full border-2 transition-all duration-300 ${isActive ? 'border-accent shadow-lg shadow-accent/20' : 'hover:border-accent/50'}`}>
+          <CardContent className="p-6">
+            {/* Step Number */}
+            <div className="flex items-center justify-between mb-4">
+              <div className={`w-10 h-10 rounded-xl ${step.bgColor} flex items-center justify-center`}>
+                <step.icon className={`w-5 h-5 ${step.textColor}`} />
+              </div>
+              <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white text-sm font-bold`}>
+                {index + 1}
+              </div>
+            </div>
+
+            <h3 className="font-bold text-lg mb-2">{step.title}</h3>
+            <p className="text-sm text-muted-foreground mb-3">{step.description}</p>
+
+            {/* Expand Indicator */}
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-accent font-medium">
+                {isActive ? 'Click to collapse' : 'Click to learn more'}
+              </span>
+              <motion.div
+                animate={{ rotate: isActive ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ChevronDown className="w-5 h-5 text-muted-foreground" />
+              </motion.div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.button>
+
+      {/* Expanded Details */}
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, y: -10 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4 overflow-hidden"
+          >
+            <Card className={`bg-gradient-to-br ${step.color} border-0`}>
+              <CardContent className="p-4 text-white">
+                <div className="flex items-start gap-3">
+                  <Info className="w-5 h-5 mt-0.5 flex-shrink-0 opacity-80" />
+                  <p className="text-sm leading-relaxed">{step.details}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 const SystemOverview = () => {
   const navigate = useNavigate();
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+
+  const handleStepClick = (index: number) => {
+    setActiveStep(activeStep === index ? null : index);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -399,7 +573,7 @@ const SystemOverview = () => {
         </motion.div>
       </section>
 
-      {/* Flowchart */}
+      {/* Flowchart - Interactive */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
@@ -409,33 +583,23 @@ const SystemOverview = () => {
             className="text-center mb-16"
           >
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-4">System Flow</p>
-            <h2 className="text-3xl md:text-4xl font-bold">How It Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Click on each step to learn more about the AI+GIS+VR integrated workflow
+            </p>
           </motion.div>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-6 gap-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
               {flowchartSteps.map((step, i) => (
-                <motion.div
+                <FlowchartStep
                   key={step.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="relative"
-                >
-                  <div className="bg-card border rounded-xl p-4 text-center h-full">
-                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                      <step.icon className="w-5 h-5 text-accent" />
-                    </div>
-                    <h3 className="font-semibold text-sm mb-1">{step.title}</h3>
-                    <p className="text-xs text-muted-foreground">{step.description}</p>
-                  </div>
-                  {i < flowchartSteps.length - 1 && (
-                    <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2">
-                      <ArrowRight className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  )}
-                </motion.div>
+                  step={step}
+                  index={i}
+                  isActive={activeStep === i}
+                  onClick={() => handleStepClick(i)}
+                  isLast={i === flowchartSteps.length - 1}
+                />
               ))}
             </div>
           </div>
