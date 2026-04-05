@@ -1,7 +1,13 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { 
   Brain,
   MapPin,
@@ -25,13 +31,8 @@ import {
   Target,
   Zap,
   ChevronDown,
-  ChevronUp,
   Info
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const modules = [
   {
@@ -285,94 +286,109 @@ const SystemOverview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-dark text-white">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-background to-purple-900/20" />
+      <section className="py-5 position-relative overflow-hidden">
+        <div 
+          className="position-absolute w-100 h-100"
+          style={{
+            background: 'linear-gradient(135deg, rgba(6, 78, 59, 0.2), rgba(88, 28, 135, 0.2))'
+          }}
+        />
         
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <Badge className="mb-6 bg-accent/20 text-accent border-accent/30">
-              <Leaf className="w-3 h-3 mr-1" />
+        <Container className="position-relative z-1 py-5">
+          <div className="text-center max-w-4xl mx-auto">
+            <Badge bg="success" className="mb-4">
+              <Leaf size={12} className="me-1" />
               Intelligent Rice Farming System
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="display-3 fw-bold mb-4">
               AI + GIS + VR
-              <span className="block text-gradient mt-2">Smart Agriculture</span>
+              <span className="d-block text-success mt-2">Smart Agriculture</span>
             </h1>
             
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="lead mb-4 text-secondary max-w-3xl mx-auto">
               A comprehensive digital transformation platform combining Artificial Intelligence, 
               Geographic Information Systems, and Virtual Reality for modern rice farming
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="rounded-full" onClick={() => navigate("/supreme-rice-cultivation")}>
-                <PlayCircle className="w-5 h-5 mr-2" />
+            <div className="d-flex flex-wrap justify-content-center gap-3">
+              <Button 
+                size="lg" 
+                variant="light"
+                className="rounded-pill"
+                onClick={() => navigate("/supreme-rice-cultivation")}
+              >
+                <PlayCircle size={20} className="me-2" />
                 Start Training
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight size={20} className="ms-2" />
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full" onClick={() => navigate("/certifications")}>
-                <GraduationCap className="w-5 h-5 mr-2" />
+              <Button 
+                variant="outline-light" 
+                size="lg"
+                className="rounded-pill"
+                onClick={() => navigate("/certifications")}
+              >
+                <GraduationCap size={20} className="me-2" />
                 View Certifications
               </Button>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </Container>
       </section>
 
       {/* Introduction */}
-      <section className="py-20 container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <Card className="border-accent/20">
-            <CardContent className="p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-4">Introduction</p>
-              <h2 className="text-3xl font-bold mb-6">Transforming Agriculture Through Technology</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Agriculture is undergoing a major digital transformation driven by Artificial Intelligence (AI), 
-                Geographic Information Systems (GIS), and immersive technologies like Virtual Reality (VR). 
-                Rice farming, being a critical component of global food security, requires modernization to 
-                address inefficiencies, climate variability, and operational challenges.
-              </p>
-              <div className="grid md:grid-cols-3 gap-4 mt-8">
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-accent/10">
-                  <Brain className="w-8 h-8 text-accent" />
-                  <div>
-                    <p className="font-semibold">AI Intelligence</p>
-                    <p className="text-xs text-muted-foreground">Predictive Analytics</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10">
-                  <MapPin className="w-8 h-8 text-emerald-500" />
-                  <div>
-                    <p className="font-semibold">GIS Mapping</p>
-                    <p className="text-xs text-muted-foreground">Field Validation</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-orange-500/10">
-                  <Glasses className="w-8 h-8 text-orange-500" />
-                  <div>
-                    <p className="font-semibold">VR Training</p>
-                    <p className="text-xs text-muted-foreground">Simulation</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+      <section className="py-5">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={8}>
+              <Card className="border-secondary">
+                <Card.Body className="p-4">
+                  <p className="text-uppercase text-success fw-bold mb-3">Introduction</p>
+                  <h2 className="h3 fw-bold mb-4">Transforming Agriculture Through Technology</h2>
+                  <p className="text-secondary mb-4">
+                    Agriculture is undergoing a major digital transformation driven by Artificial Intelligence (AI), 
+                    Geographic Information Systems (GIS), and immersive technologies like Virtual Reality (VR). 
+                    Rice farming, being a critical component of global food security, requires modernization to 
+                    address inefficiencies, climate variability, and operational challenges.
+                  </p>
+                  <Row className="g-3 mt-3">
+                    <Col md={4}>
+                      <div className="d-flex align-items-center gap-3 p-3 rounded" style={{ background: 'rgba(13, 110, 253, 0.1)' }}>
+                        <Brain size={32} className="text-primary" />
+                        <div>
+                          <p className="fw-semibold mb-0">AI Intelligence</p>
+                          <p className="text-secondary small mb-0">Predictive Analytics</p>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col md={4}>
+                      <div className="d-flex align-items-center gap-3 p-3 rounded" style={{ background: 'rgba(25, 135, 84, 0.1)' }}>
+                        <MapPin size={32} className="text-success" />
+                        <div>
+                          <p className="fw-semibold mb-0">GIS Mapping</p>
+                          <p className="text-secondary small mb-0">Field Validation</p>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col md={4}>
+                      <div className="d-flex align-items-center gap-3 p-3 rounded" style={{ background: 'rgba(253, 126, 20, 0.1)' }}>
+                        <Glasses size={32} className="text-warning" />
+                        <div>
+                          <p className="fw-semibold mb-0">VR Training</p>
+                          <p className="text-secondary small mb-0">Simulation</p>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </section>
 
       {/* Problem Statement */}

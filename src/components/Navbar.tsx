@@ -1,66 +1,35 @@
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingCart, User, LogIn } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import MagneticButton from "@/components/MagneticButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
-import { Badge } from "@/components/ui/badge";
+import { ShoppingCart, User, LogIn, Menu } from "lucide-react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
+const NavigationBar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [expanded, setExpanded] = useState(false);
   const [skipLinkVisible, setSkipLinkVisible] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { totalItems, setIsCartOpen } = useCart();
-  const menuRef = useRef<HTMLDivElement>(null);
-  const mobileButtonRef = useRef<HTMLButtonElement>(null);
-  const links = ["About", "Services", "Testimonials", "Contact"];
-  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+  const links = [
+    { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "Testimonials", path: "/testimonials" },
+    { name: "Contact", path: "/contact" }
+  ];
 
   useEffect(() => {
-    const handler = () => {
-      setScrolled(window.scrollY > 20);
-
-      // Detect active section
-      const sections = links.map((l) => document.getElementById(l.toLowerCase()));
-      let current = "";
-      for (const section of sections) {
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= 150) current = section.id;
-        }
-      }
-      setActiveSection(current);
-    };
+    const handler = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Handle escape key to close mobile menu
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && open) {
-        setOpen(false);
-        mobileButtonRef.current?.focus();
-      }
-    };
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [open]);
-
-  // Focus trap for mobile menu
-  useEffect(() => {
-    if (open && firstLinkRef.current) {
-      setTimeout(() => firstLinkRef.current?.focus(), 100);
-    }
-  }, [open]);
-
-  // Handle skip link
   const handleSkipLink = () => {
     const mainContent = document.getElementById("main-content");
     if (mainContent) {
@@ -68,6 +37,8 @@ const Navbar = () => {
       mainContent.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <>
@@ -78,235 +49,153 @@ const Navbar = () => {
           e.preventDefault();
           handleSkipLink();
         }}
-        className={`fixed top-0 left-0 z-[60] bg-accent text-accent-foreground px-4 py-2 text-sm font-medium transition-transform duration-200 ${
-          skipLinkVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`skip-link ${skipLinkVisible ? "show" : ""}`}
         onFocus={() => setSkipLinkVisible(true)}
         onBlur={() => setSkipLinkVisible(false)}
       >
         Skip to main content
       </a>
 
-      <motion.nav
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "glass-strong shadow-2xl shadow-background/50" : "bg-transparent"
-        }`}
-        role="navigation"
-        aria-label="Main navigation"
+      <Navbar
+        expand="lg"
+        fixed="top"
+        className={`py-3 ${scrolled ? "navbar-scrolled shadow-lg" : "bg-transparent"}`}
+        expanded={expanded}
+        onToggle={() => setExpanded(!expanded)}
       >
-      {/* Scroll progress bar */}
-        <motion.div
-          style={{ scaleX, transformOrigin: "0%" }}
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent"
-          aria-hidden="true"
-        />
+        <Container>
+          <Navbar.Brand as={Link} to="/" className="fw-bold fs-4 text-decoration-none text-white">
+            VR <span className="text-primary">Zone</span>
+          </Navbar.Brand>
 
-        <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          {/* Logo - Left Side */}
-          <Link 
-            to="/" 
-            className="text-xl font-bold tracking-tight focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded-lg px-2 py-1"
-            aria-label="VR Zone Home"
-          >
-            VR <span className="text-gradient">Zone</span>
-          </Link>
+          <Navbar.Toggle aria-controls="main-navbar" className="border-0">
+            <Menu className="text-white" size={24} />
+          </Navbar.Toggle>
 
-          {/* Desktop Navigation - Right Side with ml-auto */}
-          <div 
-            className="hidden md:flex items-center gap-6 ml-auto"
-            role="menubar"
-            aria-label="Desktop menu"
-          >
-          {links.map((l, index) => (
-            <button
-              key={l}
-              ref={index === 0 ? firstLinkRef : undefined}
-              onClick={() => navigate(`/${l.toLowerCase()}`)}
-              role="menuitem"
-              className={`text-sm font-medium transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-accent after:transition-all after:duration-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded px-2 py-1 ${
-                activeSection === l.toLowerCase()
-                  ? "text-accent after:w-full"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {l}
-            </button>
-          ))}
-          <button 
-            onClick={() => navigate("/certifications")}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded px-2 py-1"
-            role="menuitem"
-          >
-            Certifications
-          </button>
-          <button 
-            onClick={() => navigate("/system-overview")}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded px-2 py-1"
-            role="menuitem"
-          >
-            System Overview
-          </button>
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative p-2 rounded-full hover:bg-accent/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-            aria-label={`Shopping cart with ${totalItems} items`}
-            aria-haspopup="dialog"
-          >
-            <ShoppingCart className="w-5 h-5" aria-hidden="true" />
-            {totalItems > 0 && (
-              <Badge 
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-accent text-accent-foreground"
-                aria-label={`${totalItems} items in cart`}
-              >
-                {totalItems}
-              </Badge>
-            )}
-          </button>
-          
-          {/* Auth Buttons */}
-          <div className="flex items-center gap-2 pl-4 border-l border-border">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="rounded-full focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-              onClick={() => navigate("/signin")}
-              aria-label="Sign in to your account"
-            >
-              <LogIn className="w-4 h-4 mr-1" aria-hidden="true" />
-              Sign In
-            </Button>
-            <MagneticButton strength={0.25}>
-              <Button 
-                variant="hero" 
-                size="sm" 
-                className="rounded-full px-6 focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-                onClick={() => navigate("/signup")}
-                aria-label="Create a new account"
-              >
-                <User className="w-4 h-4 mr-1" aria-hidden="true" />
-                Sign Up
-              </Button>
-            </MagneticButton>
-          </div>
-        </div>
-        <button 
-          ref={mobileButtonRef}
-          className="md:hidden text-foreground p-2 rounded-lg hover:bg-accent/10 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
-        </button>
-      </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            ref={menuRef}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="md:hidden glass-strong px-4 pb-6 space-y-4 overflow-hidden"
-            role="menu"
-            aria-label="Mobile menu"
-          >
-            {links.map((l, index) => (
-              <button
-                key={l}
-                ref={index === 0 ? firstLinkRef : undefined}
-                onClick={() => {
-                  setOpen(false);
-                  navigate(`/${l.toLowerCase()}`);
-                }}
-                role="menuitem"
-                className={`block text-sm font-medium py-2 px-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background text-left w-full ${
-                  activeSection === l.toLowerCase() 
-                    ? "text-accent bg-accent/10" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent/5"
-                }`}
-              >
-                {l}
-              </button>
-            ))}
-            <button
-              onClick={() => {
-                setOpen(false);
-                navigate("/certifications");
-              }}
-              role="menuitem"
-              className="block text-sm font-medium py-2 px-3 rounded-lg text-left w-full text-muted-foreground hover:text-foreground hover:bg-accent/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-            >
-              Certifications
-            </button>
-            <button
-              onClick={() => {
-                setOpen(false);
-                navigate("/system-overview");
-              }}
-              role="menuitem"
-              className="block text-sm font-medium py-2 px-3 rounded-lg text-left w-full text-muted-foreground hover:text-foreground hover:bg-accent/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-            >
-              System Overview
-            </button>
-            <button
-              onClick={() => {
-                setOpen(false);
-                setIsCartOpen(true);
-              }}
-              role="menuitem"
-              className="flex items-center justify-between text-sm font-medium py-2 px-3 rounded-lg text-left w-full text-muted-foreground hover:text-foreground hover:bg-accent/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-              aria-label="Open shopping cart"
-            >
-              <span>Cart</span>
-              {totalItems > 0 && (
-                <Badge 
-                  className="h-5 px-2 text-xs bg-accent text-accent-foreground"
-                  aria-label={`${totalItems} items`}
+          <Navbar.Collapse id="main-navbar">
+            <Nav className="ms-auto align-items-center gap-3">
+              {links.map((link) => (
+                <Nav.Link
+                  key={link.name}
+                  onClick={() => navigate(link.path)}
+                  className={`nav-link-custom ${isActive(link.path) ? "active" : ""}`}
                 >
-                  {totalItems}
-                </Badge>
-              )}
-            </button>
-            
-            {/* Mobile Auth Buttons */}
-            <div className="border-t border-border pt-4 mt-2 space-y-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full rounded-full focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/signin");
-                }}
-                aria-label="Sign in to your account"
+                  {link.name}
+                </Nav.Link>
+              ))}
+
+              <Nav.Link onClick={() => navigate("/certifications")} className="nav-link-custom">
+                Certifications
+              </Nav.Link>
+
+              <Nav.Link onClick={() => navigate("/system-overview")} className="nav-link-custom">
+                System Overview
+              </Nav.Link>
+
+              <Button
+                variant="link"
+                className="position-relative p-2 text-white"
+                onClick={() => setIsCartOpen(true)}
               >
-                <LogIn className="w-4 h-4 mr-1" aria-hidden="true" />
-                Sign In
+                <ShoppingCart size={20} />
+                {totalItems > 0 && (
+                  <Badge bg="primary" className="position-absolute top-0 end-0 translate-middle p-1 rounded-circle" style={{ fontSize: "0.7rem" }}>
+                    {totalItems}
+                  </Badge>
+                )}
               </Button>
-              <Button 
-                variant="hero" 
-                size="sm" 
-                className="w-full rounded-full focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/signup");
-                }}
-                aria-label="Create a new account"
-              >
-                <User className="w-4 h-4 mr-1" aria-hidden="true" />
-                Sign Up Free
-              </Button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      </motion.nav>
+
+              <div className="d-flex gap-2 ms-lg-3 ps-lg-3 border-start border-secondary">
+                <Button variant="outline-light" size="sm" className="rounded-pill px-3" onClick={() => navigate("/signin")}>
+                  <LogIn size={16} className="me-1" />
+                  Sign In
+                </Button>
+                <Button variant="primary" size="sm" className="rounded-pill px-3" onClick={() => navigate("/signup")}>
+                  <User size={16} className="me-1" />
+                  Sign Up
+                </Button>
+              </div>
+            </Nav>
+          </Navbar.Collapse>
+
+          <Offcanvas show={expanded} onHide={() => setExpanded(false)} placement="end" className="bg-dark">
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title className="fw-bold text-white">
+                VR <span className="text-primary">Zone</span>
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body className="d-flex flex-column">
+              <Nav className="flex-column gap-2">
+                {links.map((link) => (
+                  <Nav.Link key={link.name} onClick={() => { setExpanded(false); navigate(link.path); }} className="mobile-nav-link text-white">
+                    {link.name}
+                  </Nav.Link>
+                ))}
+                <Nav.Link onClick={() => { setExpanded(false); navigate("/certifications"); }} className="mobile-nav-link text-white">
+                  Certifications
+                </Nav.Link>
+                <Nav.Link onClick={() => { setExpanded(false); navigate("/system-overview"); }} className="mobile-nav-link text-white">
+                  System Overview
+                </Nav.Link>
+                <Nav.Link onClick={() => { setExpanded(false); setIsCartOpen(true); }} className="mobile-nav-link text-white d-flex justify-content-between">
+                  <span>Cart</span>
+                  {totalItems > 0 && <Badge bg="primary">{totalItems}</Badge>}
+                </Nav.Link>
+              </Nav>
+              <div className="mt-auto pt-4 border-top border-secondary">
+                <div className="d-grid gap-2">
+                  <Button variant="outline-light" className="rounded-pill" onClick={() => { setExpanded(false); navigate("/signin"); }}>
+                    <LogIn size={16} className="me-2" /> Sign In
+                  </Button>
+                  <Button variant="primary" className="rounded-pill" onClick={() => { setExpanded(false); navigate("/signup"); }}>
+                    <User size={16} className="me-2" /> Sign Up Free
+                  </Button>
+                </div>
+              </div>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </Container>
+      </Navbar>
+
+      <style>{`
+        .skip-link {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1050;
+          background: var(--bs-primary);
+          color: white;
+          padding: 8px 16px;
+          transform: translateY(-100%);
+          transition: transform 0.2s;
+          text-decoration: none;
+          font-weight: 500;
+        }
+        .skip-link.show {
+          transform: translateY(0);
+        }
+        .nav-link-custom {
+          color: rgba(255, 255, 255, 0.8) !important;
+          font-weight: 500;
+          cursor: pointer;
+        }
+        .nav-link-custom:hover, .nav-link-custom.active {
+          color: var(--bs-primary) !important;
+        }
+        .mobile-nav-link {
+          padding: 0.75rem 1rem !important;
+          border-radius: 0.5rem;
+          cursor: pointer;
+        }
+        .mobile-nav-link:hover {
+          background: rgba(13, 110, 253, 0.1);
+          color: var(--bs-primary) !important;
+        }
+        .navbar-scrolled {
+          background: rgba(33, 37, 41, 0.95) !important;
+          backdrop-filter: blur(10px);
+        }
+      `}</style>
     </>
   );
 };
