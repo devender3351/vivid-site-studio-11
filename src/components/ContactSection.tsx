@@ -1,13 +1,12 @@
-import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import vrLounge from "@/assets/vr-lounge.jpg";
 import TiltCard from "@/components/TiltCard";
 
 const info = [
-  { icon: Phone, label: "Phone", value: "+1 (555) 987-6543" },
-  { icon: Mail, label: "Email", value: "info@vrzone.com" },
-  { icon: Clock, label: "Hours", value: "Mon–Sat: 10 AM – 9 PM" },
-  { icon: MapPin, label: "Location", value: "123 Innovation Blvd, Tech City, TX 75001" },
+  { icon: "bi bi-person", label: "Contact", value: "Dr. Devender Rapolu" },
+  { icon: "bi bi-telephone", label: "Phone", value: "225-506-0321" },
+  { icon: "bi bi-envelope", label: "Email", value: "Devender.rapolu@sus.edu" },
+  { icon: "bi bi-geo-alt", label: "Address", value: "Southern University and A&M College\nOffice of Communications\nLeon G. Netterville Drive\nJ.S. Clark Administration Building, First Floor\nBaton Rouge, LA. 70813" },
 ];
 
 const ContactSection = () => (
@@ -43,8 +42,8 @@ const ContactSection = () => (
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">
-            <p className="text-lg font-bold mb-1">Visit Our Venue</p>
-            <p className="text-sm text-muted-foreground">Experience VR Zone in person</p>
+            <p className="text-lg font-bold mb-1">Southern University</p>
+            <p className="text-sm text-muted-foreground">Visit our campus office</p>
           </div>
         </motion.div>
 
@@ -61,7 +60,7 @@ const ContactSection = () => (
               <TiltCard className="rounded-3xl h-full" tiltAmount={12}>
                 <div className="group flex flex-col items-center text-center space-y-4 p-8 rounded-3xl glass cursor-default h-full justify-center">
                   <div className="h-14 w-14 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
-                    <item.icon className="h-6 w-6 text-accent" />
+                    <i className={`${item.icon} h-6 w-6 text-accent`}></i>
                   </div>
                   <p className="font-semibold">{item.label}</p>
                   <p className="text-muted-foreground text-sm">{item.value}</p>

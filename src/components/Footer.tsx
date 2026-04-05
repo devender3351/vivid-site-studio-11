@@ -48,10 +48,10 @@ const Footer = () => (
         <div className="space-y-5">
           <h4 className="font-semibold">Contact</h4>
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-            <span>+1 (555) 987-6543</span>
-            <span>info@vrzone.com</span>
-            <span>Mon–Sat: 10 AM – 9 PM</span>
-            <span>123 Innovation Blvd,<br />Tech City, TX 75001</span>
+            <span>Dr. Devender Rapolu</span>
+            <span>225-506-0321</span>
+            <span>Devender.rapolu@sus.edu</span>
+            <span>Southern University and A&M College<br />Office of Communications<br />Leon G. Netterville Drive<br />J.S. Clark Administration Building, First Floor<br />Baton Rouge, LA. 70813</span>
           </div>
         </div>
       </div>
