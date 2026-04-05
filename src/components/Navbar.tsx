@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
-import { ShoppingCart, User, LogIn, Menu } from "lucide-react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -69,7 +68,7 @@ const NavigationBar = () => {
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="main-navbar" className="border-0">
-            <Menu className="text-white" size={24} />
+            <i className="bi bi-list text-white fs-4"></i>
           </Navbar.Toggle>
 
           <Navbar.Collapse id="main-navbar">
@@ -97,7 +96,7 @@ const NavigationBar = () => {
                 className="position-relative p-2 text-white"
                 onClick={() => setIsCartOpen(true)}
               >
-                <ShoppingCart size={20} />
+                <i className="bi bi-cart fs-5"></i>
                 {totalItems > 0 && (
                   <Badge bg="primary" className="position-absolute top-0 end-0 translate-middle p-1 rounded-circle" style={{ fontSize: "0.7rem" }}>
                     {totalItems}
@@ -107,11 +106,11 @@ const NavigationBar = () => {
 
               <div className="d-flex gap-2 ms-lg-3 ps-lg-3 border-start border-secondary">
                 <Button variant="outline-light" size="sm" className="rounded-pill px-3" onClick={() => navigate("/signin")}>
-                  <LogIn size={16} className="me-1" />
+                  <i className="bi bi-box-arrow-in-right me-1"></i>
                   Sign In
                 </Button>
                 <Button variant="primary" size="sm" className="rounded-pill px-3" onClick={() => navigate("/signup")}>
-                  <User size={16} className="me-1" />
+                  <i className="bi bi-person me-1"></i>
                   Sign Up
                 </Button>
               </div>
@@ -145,10 +144,10 @@ const NavigationBar = () => {
               <div className="mt-auto pt-4 border-top border-secondary">
                 <div className="d-grid gap-2">
                   <Button variant="outline-light" className="rounded-pill" onClick={() => { setExpanded(false); navigate("/signin"); }}>
-                    <LogIn size={16} className="me-2" /> Sign In
+                    <i className="bi bi-box-arrow-in-right me-2"></i> Sign In
                   </Button>
                   <Button variant="primary" className="rounded-pill" onClick={() => { setExpanded(false); navigate("/signup"); }}>
-                    <User size={16} className="me-2" /> Sign Up Free
+                    <i className="bi bi-person me-2"></i> Sign Up Free
                   </Button>
                 </div>
               </div>

@@ -6,40 +6,27 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import { 
-  Sprout, 
-  Plane, 
-  Brain,
-  ArrowRight,
-  Users,
-  Award,
-  TrendingUp,
-  PlayCircle,
-  Leaf,
-  Scan,
-  Wifi
-} from "lucide-react";
 
 const stats = [
-  { icon: Sprout, label: "Training Programs", value: "50+" },
-  { icon: Users, label: "Farmers Trained", value: "10K+" },
-  { icon: Award, label: "Certifications", value: "5K+" },
-  { icon: TrendingUp, label: "Yield Increase", value: "25%" },
+  { icon: "bi bi-seedling", label: "Training Programs", value: "50+" },
+  { icon: "bi bi-people", label: "Farmers Trained", value: "10K+" },
+  { icon: "bi bi-award", label: "Certifications", value: "5K+" },
+  { icon: "bi bi-graph-up-arrow", label: "Yield Increase", value: "25%" },
 ];
 
 const features = [
   {
-    icon: Plane,
+    icon: "bi bi-airplane",
     title: "Drone Training",
     description: "Master precision agriculture with cutting-edge drone technology",
   },
   {
-    icon: Sprout,
+    icon: "bi bi-seedling",
     title: "Crop Management",
     description: "Learn comprehensive rice cultivation from seed to harvest",
   },
   {
-    icon: Brain,
+    icon: "bi bi-cpu",
     title: "AI Analytics",
     description: "Harness AI power for smart farming decisions",
   },
@@ -72,12 +59,12 @@ const MainPage = () => {
                 border: '1px solid rgba(52, 211, 153, 0.3)'
               }}
             >
-              <Leaf size={48} className="text-success" />
+              <i className="bi bi-leaf fs-1 text-success"></i>
             </div>
           </div>
 
           <Badge bg="success" className="mb-3 px-3 py-2">
-            <Sprout size={16} className="me-1" />
+            <i className="bi bi-seedling me-1"></i>
             AI + GIS + VR Agriculture
           </Badge>
 
@@ -97,9 +84,9 @@ const MainPage = () => {
               className="rounded-pill px-4"
               onClick={() => navigate("/signup")}
             >
-              <PlayCircle size={20} className="me-2" />
+              <i className="bi bi-play-circle me-2"></i>
               Start Training
-              <ArrowRight size={20} className="ms-2" />
+              <i className="bi bi-arrow-right ms-2"></i>
             </Button>
             <Button 
               variant="outline-light" 
@@ -125,7 +112,7 @@ const MainPage = () => {
                       className="d-inline-flex align-items-center justify-content-center rounded-3 mb-3 p-3"
                       style={{ background: 'rgba(13, 110, 253, 0.1)' }}
                     >
-                      <feature.icon size={28} className="text-primary" />
+                      <i className={`${feature.icon} fs-4 text-primary`}></i>
                     </div>
                     <Card.Title className="text-white">{feature.title}</Card.Title>
                     <Card.Text className="text-secondary">{feature.description}</Card.Text>
@@ -155,7 +142,7 @@ const MainPage = () => {
                       className="ratio ratio-1x1 rounded-3 d-flex align-items-center justify-content-center"
                       style={{ background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(22, 163, 74, 0.2))' }}
                     >
-                      <Plane size={64} className="text-success" />
+                      <i className="bi bi-airplane fs-2 text-success"></i>
                     </div>
                   </Col>
                   <Col xs={6}>
@@ -163,7 +150,7 @@ const MainPage = () => {
                       className="ratio ratio-1x1 rounded-3 d-flex align-items-center justify-content-center"
                       style={{ background: 'linear-gradient(135deg, rgba(22, 163, 74, 0.2), rgba(20, 184, 166, 0.2))' }}
                     >
-                      <Scan size={64} className="text-success" />
+                      <i className="bi bi-upc-scan fs-2 text-success"></i>
                     </div>
                   </Col>
                   <Col xs={6}>
@@ -171,7 +158,7 @@ const MainPage = () => {
                       className="ratio ratio-1x1 rounded-3 d-flex align-items-center justify-content-center"
                       style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(6, 182, 212, 0.2))' }}
                     >
-                      <Brain size={64} className="text-info" />
+                      <i className="bi bi-cpu fs-2 text-info"></i>
                     </div>
                   </Col>
                   <Col xs={6}>
@@ -179,7 +166,7 @@ const MainPage = () => {
                       className="ratio ratio-1x1 rounded-3 d-flex align-items-center justify-content-center"
                       style={{ background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2))' }}
                     >
-                      <Wifi size={64} className="text-info" />
+                      <i className="bi bi-wifi fs-2 text-info"></i>
                     </div>
                   </Col>
                 </Row>
@@ -208,7 +195,7 @@ const MainPage = () => {
                 onClick={() => navigate("/registration")}
               >
                 Get Started
-                <ArrowRight size={16} className="ms-2" />
+                <i className="bi bi-arrow-right ms-2"></i>
               </Button>
             </Col>
           </Row>
@@ -236,7 +223,7 @@ const MainPage = () => {
                       className="d-inline-flex align-items-center justify-content-center rounded-3 mb-3 p-3"
                       style={{ background: 'rgba(13, 110, 253, 0.1)' }}
                     >
-                      <stat.icon size={24} className="text-primary" />
+                      <i className={`${stat.icon} fs-4 text-primary`}></i>
                     </div>
                     <div className="display-4 fw-bold mb-2">{stat.value}</div>
                     <div className="text-secondary">{stat.label}</div>

@@ -8,49 +8,24 @@ import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { 
-  Brain,
-  MapPin,
-  Glasses,
-  Sprout,
-  TrendingUp,
-  Shield,
-  Award,
-  ArrowRight,
-  Database,
-  CloudSun,
-  Droplets,
-  Bug,
-  Calendar,
-  Factory,
-  GraduationCap,
-  PlayCircle,
-  Leaf,
-  Cpu,
-  Wifi,
-  Target,
-  Zap,
-  ChevronDown,
-  Info
-} from "lucide-react";
 
 const modules = [
   {
-    icon: Brain,
+    icon: "bi bi-cpu",
     title: "AI + Predictive Module",
     description: "Crop monitoring using image processing, harvest prediction using agronomic formulas, yield estimation using AI models",
     features: ["Disease Detection", "Yield Prediction", "Harvest Forecast", "GDD Model"],
     color: "from-purple-500 to-indigo-600"
   },
   {
-    icon: MapPin,
+    icon: "bi bi-geo-alt",
     title: "GIS + Validation Module",
     description: "Field boundary verification, soil mapping using SSURGO, photo and sensor validation, data reconciliation",
     features: ["Boundary Check", "Soil Mapping", "Data QA", "Validation"],
     color: "from-emerald-500 to-teal-600"
   },
   {
-    icon: Glasses,
+    icon: "bi bi-cpu",
     title: "VR Simulation Module",
     description: "Interactive 3D rice farming environment, real-time simulation of farming scenarios, game-based learning",
     features: ["3D Environment", "Real-time Sim", "Game Learning", "Training"],
@@ -301,7 +276,7 @@ const SystemOverview = () => {
         <Container className="position-relative z-1 py-5">
           <div className="text-center max-w-4xl mx-auto">
             <Badge bg="success" className="mb-4">
-              <Leaf size={12} className="me-1" />
+              <i className="bi bi-leaf me-1"></i>
               Intelligent Rice Farming System
             </Badge>
             
@@ -322,9 +297,9 @@ const SystemOverview = () => {
                 className="rounded-pill"
                 onClick={() => navigate("/supreme-rice-cultivation")}
               >
-                <PlayCircle size={20} className="me-2" />
+                <i className="bi bi-play-circle me-2"></i>
                 Start Training
-                <ArrowRight size={20} className="ms-2" />
+                <i className="bi bi-arrow-right ms-2"></i>
               </Button>
               <Button 
                 variant="outline-light" 
@@ -332,7 +307,7 @@ const SystemOverview = () => {
                 className="rounded-pill"
                 onClick={() => navigate("/certifications")}
               >
-                <GraduationCap size={20} className="me-2" />
+                <i className="bi bi-mortarboard me-2"></i>
                 View Certifications
               </Button>
             </div>
@@ -358,7 +333,7 @@ const SystemOverview = () => {
                   <Row className="g-3 mt-3">
                     <Col md={4}>
                       <div className="d-flex align-items-center gap-3 p-3 rounded" style={{ background: 'rgba(13, 110, 253, 0.1)' }}>
-                        <Brain size={32} className="text-primary" />
+                        <i className="bi bi-cpu fs-3 text-primary"></i>
                         <div>
                           <p className="fw-semibold mb-0">AI Intelligence</p>
                           <p className="text-secondary small mb-0">Predictive Analytics</p>
@@ -367,7 +342,7 @@ const SystemOverview = () => {
                     </Col>
                     <Col md={4}>
                       <div className="d-flex align-items-center gap-3 p-3 rounded" style={{ background: 'rgba(25, 135, 84, 0.1)' }}>
-                        <MapPin size={32} className="text-success" />
+                        <i className="bi bi-geo-alt fs-3 text-success"></i>
                         <div>
                           <p className="fw-semibold mb-0">GIS Mapping</p>
                           <p className="text-secondary small mb-0">Field Validation</p>
@@ -376,7 +351,7 @@ const SystemOverview = () => {
                     </Col>
                     <Col md={4}>
                       <div className="d-flex align-items-center gap-3 p-3 rounded" style={{ background: 'rgba(253, 126, 20, 0.1)' }}>
-                        <Glasses size={32} className="text-warning" />
+                        <i className="bi bi-badge-3d fs-3 text-warning"></i>
                         <div>
                           <p className="fw-semibold mb-0">VR Training</p>
                           <p className="text-secondary small mb-0">Simulation</p>
@@ -392,115 +367,102 @@ const SystemOverview = () => {
       </section>
 
       {/* Problem Statement */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-4">Problem Statement</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Challenges in Rice Farming</h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Card>
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-                  <Bug className="w-6 h-6 text-red-500" />
-                </div>
-                <CardTitle>Agronomic Challenges</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Late detection of pests and diseases</li>
-                  <li>• Inefficient irrigation and water misuse</li>
-                  <li>• Improper fertilizer application</li>
-                  <li>• Lack of soil-based decision-making</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
-                  <Factory className="w-6 h-6 text-orange-500" />
-                </div>
-                <CardTitle>Operational Challenges</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• No accurate harvest prediction</li>
-                  <li>• Poor mill logistics planning</li>
-                  <li>• Lack of real-time field monitoring</li>
-                  <li>• Data inconsistency across systems</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4">
-                  <GraduationCap className="w-6 h-6 text-blue-500" />
-                </div>
-                <CardTitle>Training Challenges</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Limited access to hands-on training</li>
-                  <li>• High risk in adopting new techniques</li>
-                  <li>• Lack of skill certification</li>
-                  <li>• Traditional knowledge gaps</li>
-                </ul>
-              </CardContent>
-            </Card>
+      <section className="py-5 bg-dark">
+        <Container>
+          <div className="text-center mb-5">
+            <p className="text-uppercase text-primary fw-bold mb-2">Problem Statement</p>
+            <h2 className="h2 fw-bold">Challenges in Rice Farming</h2>
           </div>
-        </div>
+
+          <Row className="g-4">
+            <Col md={4}>
+              <Card className="h-100 bg-dark border-secondary">
+                <Card.Body className="p-4">
+                  <div className="d-flex align-items-center justify-content-center rounded-3 mb-3 p-3" style={{ background: 'rgba(220, 53, 69, 0.1)', width: 'fit-content' }}>
+                    <Bug size={24} className="text-danger" />
+                  </div>
+                  <Card.Title className="text-white">Agronomic Challenges</Card.Title>
+                  <ul className="list-unstyled text-secondary mt-3">
+                    <li>• Late detection of pests and diseases</li>
+                    <li>• Inefficient irrigation and water misuse</li>
+                    <li>• Improper fertilizer application</li>
+                    <li>• Lack of soil-based decision-making</li>
+                  </ul>
+                </Card.Body>
+              </Card>
+            </Col>
+
+            <Col md={4}>
+              <Card className="h-100 bg-dark border-secondary">
+                <Card.Body className="p-4">
+                  <div className="d-flex align-items-center justify-content-center rounded-3 mb-3 p-3" style={{ background: 'rgba(253, 126, 20, 0.1)', width: 'fit-content' }}>
+                    <Factory size={24} className="text-warning" />
+                  </div>
+                  <Card.Title className="text-white">Operational Challenges</Card.Title>
+                  <ul className="list-unstyled text-secondary mt-3">
+                    <li>• No accurate harvest prediction</li>
+                    <li>• Poor mill logistics planning</li>
+                    <li>• Lack of real-time field monitoring</li>
+                    <li>• Data inconsistency across systems</li>
+                  </ul>
+                </Card.Body>
+              </Card>
+            </Col>
+
+            <Col md={4}>
+              <Card className="h-100 bg-dark border-secondary">
+                <Card.Body className="p-4">
+                  <div className="d-flex align-items-center justify-content-center rounded-3 mb-3 p-3" style={{ background: 'rgba(13, 110, 253, 0.1)', width: 'fit-content' }}>
+                    <GraduationCap size={24} className="text-primary" />
+                  </div>
+                  <Card.Title className="text-white">Training Challenges</Card.Title>
+                  <ul className="list-unstyled text-secondary mt-3">
+                    <li>• Limited access to hands-on training</li>
+                    <li>• High risk in adopting new techniques</li>
+                    <li>• Lack of skill certification</li>
+                    <li>• Traditional knowledge gaps</li>
+                  </ul>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </section>
 
       {/* System Architecture */}
-      <section className="py-20 container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-4">System Architecture</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Three Integrated Modules</h2>
-        </motion.div>
+      <section className="py-5">
+        <Container>
+          <div className="text-center mb-5">
+            <p className="text-uppercase text-primary fw-bold mb-2">System Architecture</p>
+            <h2 className="h2 fw-bold">Three Integrated Modules</h2>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {modules.map((module, i) => (
-            <motion.div
-              key={module.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-            >
-              <Card className="h-full border-2 hover:border-accent/50 transition-colors">
-                <CardHeader>
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${module.color} flex items-center justify-center mb-4`}>
-                    <module.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <CardTitle className="text-xl">{module.title}</CardTitle>
-                  <CardDescription>{module.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {module.features.map((feature) => (
-                      <Badge key={feature} variant="secondary" className="text-xs">
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+          <Row className="g-4">
+            {modules.map((module) => (
+              <Col key={module.title} md={4}>
+                <Card className="h-100 bg-dark border-secondary">
+                  <Card.Body className="p-4">
+                    <div 
+                      className="d-flex align-items-center justify-content-center rounded-3 mb-3 p-3"
+                      style={{ background: `linear-gradient(135deg, ${module.color})` }}
+                    >
+                      <module.icon size={28} className="text-white" />
+                    </div>
+                    <Card.Title className="text-white">{module.title}</Card.Title>
+                    <Card.Text className="text-secondary">{module.description}</Card.Text>
+                    <div className="d-flex flex-wrap gap-2 mt-3">
+                      {module.features.map((feature) => (
+                        <Badge key={feature} bg="secondary" className="text-xs">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </section>
 
       {/* AI Techniques */}
