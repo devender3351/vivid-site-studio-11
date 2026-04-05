@@ -121,20 +121,19 @@ const Navbar = () => {
             aria-label="Desktop menu"
           >
           {links.map((l, index) => (
-            <a
+            <button
               key={l}
               ref={index === 0 ? firstLinkRef : undefined}
-              href={`#${l.toLowerCase()}`}
+              onClick={() => navigate(`/${l.toLowerCase()}`)}
               role="menuitem"
               className={`text-sm font-medium transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-accent after:transition-all after:duration-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded px-2 py-1 ${
                 activeSection === l.toLowerCase()
                   ? "text-accent after:w-full"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              aria-current={activeSection === l.toLowerCase() ? "page" : undefined}
             >
               {l}
-            </a>
+            </button>
           ))}
           <button 
             onClick={() => navigate("/certifications")}
@@ -218,21 +217,22 @@ const Navbar = () => {
             aria-label="Mobile menu"
           >
             {links.map((l, index) => (
-              <a
+              <button
                 key={l}
                 ref={index === 0 ? firstLinkRef : undefined}
-                href={`#${l.toLowerCase()}`}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  navigate(`/${l.toLowerCase()}`);
+                }}
                 role="menuitem"
-                className={`block text-sm font-medium py-2 px-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background ${
+                className={`block text-sm font-medium py-2 px-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background text-left w-full ${
                   activeSection === l.toLowerCase() 
                     ? "text-accent bg-accent/10" 
                     : "text-muted-foreground hover:text-foreground hover:bg-accent/5"
                 }`}
-                aria-current={activeSection === l.toLowerCase() ? "page" : undefined}
               >
                 {l}
-              </a>
+              </button>
             ))}
             <button
               onClick={() => {
